@@ -1,0 +1,24 @@
+buildscript {
+    ext.kotlin_version = '2.0.20' // Ensure this is the correct and latest version
+    repositories {
+        google()
+        mavenCentral()
+    }}
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
+    }
+}
+
+rootProject.buildDir = "../build"
+subprojects {
+    project.buildDir = "${rootProject.buildDir}/${project.name}"
+}
+subprojects {
+    project.evaluationDependsOn(":app")
+}
+
+tasks.register("clean", Delete) {
+    delete rootProject.buildDir
+}
